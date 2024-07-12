@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormDescription, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 import { cuisineList } from "@/config/restaurant-options-config";
 import { useFormContext } from "react-hook-form";
@@ -15,8 +9,8 @@ const CuisinesSection = () => {
   return (
     <div className="space-y-2">
       <div>
-        <h2 className="text-2xl font-bold">Cuisine</h2>
-        <FormDescription>Select the cuisine of your restaurant servrs</FormDescription>
+        <h2 className="text-2xl font-bold">Foods</h2>
+        <FormDescription>Select the food of your restaurant servrs</FormDescription>
       </div>
 
       <FormField
