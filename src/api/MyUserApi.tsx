@@ -7,8 +7,10 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useGetMyUser = () => {
   const { getAccessTokenSilently } = useAuth0();
+
   const getMyUserRequest = async (): Promise<User> => {
     const accessToken = await getAccessTokenSilently();
+
     const response = await fetch(`${API_BASE_URL}/api/my/user`, {
       method: "GET",
       headers: {
@@ -16,19 +18,24 @@ export const useGetMyUser = () => {
         "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) {
-      throw new Error("failed to get user");
+      throw new Error("Failed to fetch user");
     }
+
     return response.json();
   };
+
   const {
     data: currentUser,
     isLoading,
     error,
-  } = useQuery("featchCurrentUser", getMyUserRequest);
+  } = useQuery("fetchCurrentUser", getMyUserRequest);
+
   if (error) {
     toast.error(error.toString());
   }
+
   return { currentUser, isLoading };
 };
 

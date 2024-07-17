@@ -3,10 +3,12 @@ import MenuItem from "@/components/MenuItem";
 import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Card } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { MenuItem as MenuItems } from "../types";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import CheckoutButton from "@/components/CheckoutButton";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 
 export type CartItem = {
   _id: string;
@@ -68,6 +70,29 @@ const DetailPage = () => {
       return updatedCartItems;
     });
   };
+  const onCheckout = async (userFormData: UserFormData) => {
+    console.log("userFormData", userFormData);
+    // if (!restaurant) {
+    //   return;
+    // }
+    // const checkoutData = {
+    //   cartItems: cartItems.map((cartItem) => ({
+    //     menuItemId: cartItem._id,
+    //     name: cartItem.name,
+    //     quantity: cartItem.quantity.toString(),
+    //   })),
+    //   restaurantId: restaurant._id,
+    //   deliveryDetails: {
+    //     name: userFormData.name,
+    //     addressLine1: userFormData.addressLine1,
+    //     city: userFormData.city,
+    //     country: userFormData.country,
+    //     email: userFormData.email as string,
+    //   },
+    // };
+    // const data = await createCheckoutSession(checkoutData);
+    // window.location.href = data.url;
+  };
   if (isLoading || !restaurant) {
     return "Loading...";
   }
@@ -96,6 +121,14 @@ const DetailPage = () => {
               removeFromCart={removeFromCart}
             />
           </Card>
+          <CardFooter>
+            <CheckoutButton
+              disabled={cartItems.length === 0}
+              onCheckout={onCheckout}
+
+              // isLoading={isCheckoutLoading}
+            />
+          </CardFooter>
         </div>
       </div>
     </div>

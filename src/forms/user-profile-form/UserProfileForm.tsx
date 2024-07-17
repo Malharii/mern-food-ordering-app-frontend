@@ -26,7 +26,7 @@ const formSchema = z.object({
   // mobileNo: z.string().min(10, "Mobile No is required"),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   currentUser: User;
